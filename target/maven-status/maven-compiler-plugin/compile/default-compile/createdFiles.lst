@@ -1,0 +1,5 @@
+sample/tomcat7/jsp/SampleTomcat7JspApplication.class
+sample/tomcat7/jsp/dal/JdbcCustomerDAO.class
+sample/tomcat7/jsp/model/Customer.class
+sample/tomcat7/jsp/dal/CustomerDAO.class
+sample/tomcat7/jsp/WelcomeController.class
