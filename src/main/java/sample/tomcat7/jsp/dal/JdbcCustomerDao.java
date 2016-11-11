@@ -1,26 +1,14 @@
 package sample.tomcat7.jsp.dal;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Customer;
-
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Service
-public class JdbcCustomerDAO implements CustomerDAO {
-	private DataSource dataSource;
-
-	@Autowired
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+public class JdbcCustomerDao extends MyJdbcDaoSupport implements CustomerDao {
 
 	public void insert(Customer customer){
 
@@ -29,8 +17,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
 		Connection conn = null;
 
 		try {
-			conn = dataSource.getConnection();
-//            conn = getConnection();
+            conn = getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, customer.getCustId());
 			ps.setString(2, customer.getName());
@@ -57,8 +44,7 @@ public class JdbcCustomerDAO implements CustomerDAO {
 		Connection conn = null;
 
 		try {
-			conn = dataSource.getConnection();
-//            conn = getConnection();
+            conn = getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, custId);
 			Customer customer = null;

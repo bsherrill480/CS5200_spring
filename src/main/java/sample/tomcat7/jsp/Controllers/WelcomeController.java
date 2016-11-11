@@ -24,8 +24,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.apache.log4j.Logger;
-import sample.tomcat7.jsp.dal.CustomerDAO;
+import sample.tomcat7.jsp.dal.CustomerDao;
+import sample.tomcat7.jsp.dal.UserDao;
 import sample.tomcat7.jsp.model.Customer;
+import sample.tomcat7.jsp.model.User;
 
 
 @Controller
@@ -33,16 +35,21 @@ public class WelcomeController {
 
 	static Logger log = Logger.getLogger(WelcomeController.class.getName());
 
+//	@Autowired
+//	private CustomerDao customerDao;
+
 	@Autowired
-	private CustomerDAO customerDAO;
+	private UserDao userDao;
 
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
 
 	@GetMapping("/")
 	public String welcome(Map<String, Object> model) {
-		Customer customer = this.customerDAO.findByCustomerId(1);
-		model.put("customer", customer);
+//		Customer customer = this.customerDao.findByCustomerId(1);
+//		model.put("customer", customer);
+        User bruce = userDao.getUserByUserName("Bruce");
+		model.put("customer", bruce);
 		model.put("time", new Date());
 		model.put("message", this.message);
 		return "welcome";

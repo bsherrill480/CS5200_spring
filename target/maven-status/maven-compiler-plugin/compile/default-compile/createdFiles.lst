@@ -1,5 +1,9 @@
+sample/tomcat7/jsp/dal/MyJdbcDaoSupport.class
+sample/tomcat7/jsp/dal/CustomerDao.class
+sample/tomcat7/jsp/model/User.class
+sample/tomcat7/jsp/dal/UserDao.class
+sample/tomcat7/jsp/dal/JdbcUserDao.class
 sample/tomcat7/jsp/SampleTomcat7JspApplication.class
-sample/tomcat7/jsp/dal/JdbcCustomerDAO.class
+sample/tomcat7/jsp/dal/JdbcCustomerDao.class
 sample/tomcat7/jsp/model/Customer.class
-sample/tomcat7/jsp/dal/CustomerDAO.class
 sample/tomcat7/jsp/Controllers/WelcomeController.class
