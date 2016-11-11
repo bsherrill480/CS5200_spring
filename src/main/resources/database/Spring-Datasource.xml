@@ -11,10 +11,4 @@
 		<property name="username" value="root" />
 		<property name="password" value="dickslol" />
 	</bean>
-
-	<bean id="jdbcCustomerDAO" class="sample.tomcat7.jsp.dal.JdbcCustomerDAO">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-
-
 </beans>
