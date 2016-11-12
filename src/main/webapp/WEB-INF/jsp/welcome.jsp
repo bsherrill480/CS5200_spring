@@ -14,8 +14,7 @@
 	<br>
 	Message: ${message}
 	<br>
-	Customer: ${customer.getUserName()}
-	Customer: ${customer.getPassword()}
+	User: ${user.getUserName()}
 </body>
 
 </html>

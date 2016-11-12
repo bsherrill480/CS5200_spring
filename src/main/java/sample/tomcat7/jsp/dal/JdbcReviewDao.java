@@ -1,17 +1,16 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Review;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by brian on 11/11/16.
  */
+@Service
 public class JdbcReviewDao extends MyJdbcDaoSupport implements ReviewDao {
     @Override
     public Review create(Review review) {
@@ -20,7 +19,7 @@ public class JdbcReviewDao extends MyJdbcDaoSupport implements ReviewDao {
 		Connection conn = null;
 		try {
 		    conn = getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, review.getContent());
 			ps.setBigDecimal(2, review.getRating());
 			ps.setString(3, review.getUserName());

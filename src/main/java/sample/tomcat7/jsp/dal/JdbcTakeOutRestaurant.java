@@ -1,5 +1,6 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Restaurant;
 import sample.tomcat7.jsp.model.TakeOutRestaurant;
 
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by brian on 11/11/16.
  */
+@Service("takeOutRestaurant")
 public class JdbcTakeOutRestaurant extends JdbcRestaurantDao implements TakeOutRestaurantDao {
     /**
      *
@@ -37,7 +39,7 @@ public class JdbcTakeOutRestaurant extends JdbcRestaurantDao implements TakeOutR
                 takeOutRestaurant.getCompanyName()
         );
         Restaurant restaurant = create(toMakeRestaurant);
-        String sql = "INSERT INTO TakeOutRestaurants VALUES (?, ?)";
+        String sql = "INSERT INTO TakeOutRestaurant VALUES (?, ?)";
         Connection conn = null;
         try {
             conn = getConnection();
@@ -66,9 +68,9 @@ public class JdbcTakeOutRestaurant extends JdbcRestaurantDao implements TakeOutR
 		String sql = "SELECT TakeOutRestaurant.RestaurantId AS RestaurantId, Name, " +
                 "Description, Menu, Hours, Active, CuisineType, Street1, Street2, City, State, Zip, " +
                 "CompanyName, MaxWaitTime " +
-                "FROM TakeOutRestaurants " +
-                "JOIN Restaurants ON TakeOutRestaurants.RestaurandId = Restaurants.RestaurantId " +
-                "WHERE TakeOutRestaurants.RestaurantId = ?";
+                "FROM TakeOutRestaurant " +
+                "JOIN Restaurants ON TakeOutRestaurant.RestaurantId = Restaurants.RestaurantId " +
+                "WHERE TakeOutRestaurant.RestaurantId = ?";
 
 		Connection conn = null;
 
@@ -115,8 +117,8 @@ public class JdbcTakeOutRestaurant extends JdbcRestaurantDao implements TakeOutR
 		String sql = "SELECT TakeOutRestaurant.RestaurantId AS RestaurantId, Name, " +
                 "Description, Menu, Hours, Active, CuisineType, Street1, Street2, City, State, Zip, " +
                 "CompanyName, MaxWaitTime " +
-                "FROM TakeOutRestaurants " +
-                "JOIN Restaurants ON TakeOutRestaurants.RestaurandId = Restaurants.RestaurantId " +
+                "FROM TakeOutRestaurant " +
+                "JOIN Restaurants ON TakeOutRestaurant.RestaurantId = Restaurants.RestaurantId " +
                 "WHERE Restaurants.CompanyName = ?";
 
 		Connection conn = null;

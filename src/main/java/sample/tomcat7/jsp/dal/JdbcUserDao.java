@@ -14,7 +14,32 @@ import java.sql.SQLException;
 public class JdbcUserDao extends MyJdbcDaoSupport implements UserDao {
     @Override
     public User create(User user) {
-        return null;
+		String sql = "INSERT INTO Users VALUES (?, ?, ?, ?, ?, ?)";
+		Connection conn = null;
+		try {
+		    conn = getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getUserName());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getFirstName());
+			ps.setString(4, user.getLastName());
+			ps.setString(5, user.getEmail());
+			ps.setString(6, user.getPhone());
+			int affectedRows = ps.executeUpdate();
+			if(affectedRows == 0) {
+				throw new SQLException("Creating restaurant failed, no rows affected.");
+			}
+			ps.close();
+		    return user;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {}
+			}
+		}
     }
 
     @Override

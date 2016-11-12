@@ -1,5 +1,6 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Restaurant;
 import sample.tomcat7.jsp.model.FoodCartRestaurant;
 
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by brian on 11/11/16.
  */
+@Service("foodCartRestaurant")
 public class JdbcFoodCartRestaurant extends JdbcRestaurantDao implements FoodCartRestaurantDao {
     /**
      *
@@ -37,7 +39,7 @@ public class JdbcFoodCartRestaurant extends JdbcRestaurantDao implements FoodCar
                 foodCartRestaurant.getCompanyName()
         );
         Restaurant restaurant = create(toMakeRestaurant);
-        String sql = "INSERT INTO FoodCartRestaurants VALUES (?, ?)";
+        String sql = "INSERT INTO FoodCartRestaurant VALUES (?, ?)";
         Connection conn = null;
         try {
             conn = getConnection();
@@ -66,9 +68,9 @@ public class JdbcFoodCartRestaurant extends JdbcRestaurantDao implements FoodCar
 		String sql = "SELECT FoodCartRestaurant.RestaurantId AS RestaurantId, Name, " +
                 "Description, Menu, Hours, Active, CuisineType, Street1, Street2, City, State, Zip, " +
                 "CompanyName, Licensed " +
-                "FROM FoodCartRestaurants " +
-                "JOIN Restaurants ON FoodCartRestaurants.RestaurandId = Restaurants.RestaurantId " +
-                "WHERE FoodCartRestaurants.RestaurantId = ?";
+                "FROM FoodCartRestaurant " +
+                "JOIN Restaurants ON FoodCartRestaurant.RestaurantId = Restaurants.RestaurantId " +
+                "WHERE FoodCartRestaurant.RestaurantId = ?";
 
 		Connection conn = null;
 
@@ -115,8 +117,8 @@ public class JdbcFoodCartRestaurant extends JdbcRestaurantDao implements FoodCar
 		String sql = "SELECT FoodCartRestaurant.RestaurantId AS RestaurantId, Name, " +
                 "Description, Menu, Hours, Active, CuisineType, Street1, Street2, City, State, Zip, " +
                 "CompanyName, Licensed " +
-                "FROM FoodCartRestaurants " +
-                "JOIN Restaurants ON FoodCartRestaurants.RestaurandId = Restaurants.RestaurantId " +
+                "FROM FoodCartRestaurant " +
+                "JOIN Restaurants ON FoodCartRestaurant.RestaurantId = Restaurants.RestaurantId " +
                 "WHERE Restaurants.CompanyName = ?";
 
 		Connection conn = null;

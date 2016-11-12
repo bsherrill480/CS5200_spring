@@ -1,5 +1,6 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.CreditCard;
 import sample.tomcat7.jsp.model.User;
 
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by brian on 11/10/16.
  */
+@Service
 public class JdbcCreditCardDao extends MyJdbcDaoSupport implements CreditCardDao {
     @Override
     public CreditCard create(CreditCard creditCard) {

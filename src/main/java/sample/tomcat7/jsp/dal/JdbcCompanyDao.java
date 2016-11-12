@@ -1,5 +1,6 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Company;
 
 import java.sql.Connection;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 /**
  * Created by brian on 11/11/16.
  */
+@Service
 public class JdbcCompanyDao extends MyJdbcDaoSupport implements CompanyDao {
 
     @Override

@@ -1,17 +1,16 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Reservation;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by brian on 11/11/16.
  */
+@Service
 public class JdbcReservationDao extends MyJdbcDaoSupport implements ReservationDao {
     @Override
     public Reservation create(Reservation reservation) {
@@ -20,7 +19,7 @@ public class JdbcReservationDao extends MyJdbcDaoSupport implements ReservationD
 		Connection conn = null;
 		try {
 		    conn = getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setTimestamp(1, reservation.getStart());
 			ps.setTimestamp(2, reservation.getEnd());
 			ps.setInt(3, reservation.getSize());

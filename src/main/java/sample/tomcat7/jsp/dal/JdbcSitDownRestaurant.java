@@ -1,5 +1,6 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Restaurant;
 import sample.tomcat7.jsp.model.SitDownRestaurant;
 
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by brian on 11/11/16.
  */
+@Service("sitDownRestaurant")
 public class JdbcSitDownRestaurant extends JdbcRestaurantDao implements SitDownRestaurantDao {
     /**
      *
@@ -37,7 +39,7 @@ public class JdbcSitDownRestaurant extends JdbcRestaurantDao implements SitDownR
                 sitDownRestaurant.getCompanyName()
         );
         Restaurant restaurant = create(toMakeRestaurant);
-        String sql = "INSERT INTO SitDownRestaurants VALUES (?, ?)";
+        String sql = "INSERT INTO SitDownRestaurant VALUES (?, ?)";
         Connection conn = null;
         try {
             conn = getConnection();
@@ -66,9 +68,9 @@ public class JdbcSitDownRestaurant extends JdbcRestaurantDao implements SitDownR
 		String sql = "SELECT SitDownRestaurant.RestaurantId AS RestaurantId, Name, " +
                 "Description, Menu, Hours, Active, CuisineType, Street1, Street2, City, State, Zip, " +
                 "CompanyName, Capacity " +
-                "FROM SitDownRestaurants " +
-                "JOIN Restaurants ON SitDownRestaurants.RestaurandId = Restaurants.RestaurantId " +
-                "WHERE SitDownRestaurants.RestaurantId = ?";
+                "FROM SitDownRestaurant " +
+                "JOIN Restaurants ON SitDownRestaurant.RestaurantId = Restaurants.RestaurantId " +
+                "WHERE SitDownRestaurant.RestaurantId = ?";
 
 		Connection conn = null;
 
@@ -115,8 +117,8 @@ public class JdbcSitDownRestaurant extends JdbcRestaurantDao implements SitDownR
 		String sql = "SELECT SitDownRestaurant.RestaurantId AS RestaurantId, Name, " +
                 "Description, Menu, Hours, Active, CuisineType, Street1, Street2, City, State, Zip, " +
                 "CompanyName, Capacity " +
-                "FROM SitDownRestaurants " +
-                "JOIN Restaurants ON SitDownRestaurants.RestaurandId = Restaurants.RestaurantId " +
+                "FROM SitDownRestaurant " +
+                "JOIN Restaurants ON SitDownRestaurant.RestaurantId = Restaurants.RestaurantId " +
                 "WHERE Restaurants.CompanyName = ?";
 
 		Connection conn = null;

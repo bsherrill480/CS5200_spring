@@ -1,17 +1,16 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Restaurant;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by brian on 11/11/16.
  */
+@Service("restaurantDao")
 public class JdbcRestaurantDao extends MyJdbcDaoSupport implements RestaurantDao {
     @Override
     public Restaurant create(Restaurant restaurant) {
@@ -21,7 +20,7 @@ public class JdbcRestaurantDao extends MyJdbcDaoSupport implements RestaurantDao
 		Connection conn = null;
 		try {
 		    conn = getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, restaurant.getName());
 			ps.setString(2, restaurant.getDescription());
 			ps.setString(3, restaurant.getMenu());
@@ -102,7 +101,7 @@ public class JdbcRestaurantDao extends MyJdbcDaoSupport implements RestaurantDao
 
     @Override
     public List<Restaurant> getRestaurantByCuisine(Restaurant.CuisineType cusine) {
-		String sql = "SELECT * FROM Restaurants WHERE CruisineType = ?";
+		String sql = "SELECT * FROM Restaurants WHERE CuisineType = ?";
 
 		Connection conn = null;
 

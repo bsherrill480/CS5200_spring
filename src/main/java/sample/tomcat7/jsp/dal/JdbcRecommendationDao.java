@@ -1,17 +1,16 @@
 package sample.tomcat7.jsp.dal;
 
+import org.springframework.stereotype.Service;
 import sample.tomcat7.jsp.model.Recommendation;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by brian on 11/11/16.
  */
+@Service
 public class JdbcRecommendationDao extends MyJdbcDaoSupport implements RecommendationDao {
     @Override
     public Recommendation create(Recommendation recommendation) {
@@ -19,7 +18,7 @@ public class JdbcRecommendationDao extends MyJdbcDaoSupport implements Recommend
 		Connection conn = null;
 		try {
 		    conn = getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, recommendation.getUserName());
 			ps.setInt(2, recommendation.getRestaurantId());
 			int affectedRows = ps.executeUpdate();
