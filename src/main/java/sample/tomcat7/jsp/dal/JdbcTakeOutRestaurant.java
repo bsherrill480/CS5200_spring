@@ -39,6 +39,7 @@ public class JdbcTakeOutRestaurant extends JdbcRestaurantDao implements TakeOutR
                 takeOutRestaurant.getCompanyName()
         );
         Restaurant restaurant = create(toMakeRestaurant);
+		takeOutRestaurant.setRestaurantId(restaurant.getRestaurantId());
         String sql = "INSERT INTO TakeOutRestaurant VALUES (?, ?)";
         Connection conn = null;
         try {

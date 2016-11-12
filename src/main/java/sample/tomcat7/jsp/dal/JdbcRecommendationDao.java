@@ -14,7 +14,7 @@ import java.util.List;
 public class JdbcRecommendationDao extends MyJdbcDaoSupport implements RecommendationDao {
     @Override
     public Recommendation create(Recommendation recommendation) {
-		String sql = "INSERT INTO Recommendations VALUES (?, ?)";
+		String sql = "INSERT INTO Recommendations (UserName, RestaurantId) VALUES (?, ?)";
 		Connection conn = null;
 		try {
 		    conn = getConnection();

@@ -39,6 +39,7 @@ public class JdbcSitDownRestaurant extends JdbcRestaurantDao implements SitDownR
                 sitDownRestaurant.getCompanyName()
         );
         Restaurant restaurant = create(toMakeRestaurant);
+        sitDownRestaurant.setRestaurantId(restaurant.getRestaurantId());
         String sql = "INSERT INTO SitDownRestaurant VALUES (?, ?)";
         Connection conn = null;
         try {

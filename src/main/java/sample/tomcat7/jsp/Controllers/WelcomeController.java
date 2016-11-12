@@ -65,11 +65,11 @@ public class WelcomeController {
 	@Autowired
 	private ReviewDao reviewDao;
 
-//	@Autowired
-//	private  RecommendationDao recommendationDao;
-//
-//	@Autowired
-//	private ReservationDao reservationDao;
+	@Autowired
+	private  RecommendationDao recommendationDao;
+
+	@Autowired
+	private ReservationDao reservationDao;
 
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
@@ -91,6 +91,8 @@ public class WelcomeController {
 		takeOutRestaurantExerciser(company);
         foodCartRestaurantExerciser(company);
         reviewExerciser(user, restaurant);
+		recommendationExerciser(user, restaurant);
+		reservationExerciser(user, sitDownRestaurant);
 		model.put("user", user);
 		return "welcome";
 	}
@@ -216,9 +218,9 @@ public class WelcomeController {
 				15
 		);
 		sitDownRestaurantDao.delete(restaurantInit1);
-		sitDownRestaurantDao.create(restaurantInit1);
+		SitDownRestaurant sitDownRestaurant = sitDownRestaurantDao.create(restaurantInit1);
 		sitDownRestaurantDao.getSitDownRestaurantByCompanyName(company.getCompanyName());
-		return sitDownRestaurantDao.getSitDownRestaurantById(restaurantInit1.getRestaurantId());
+		return sitDownRestaurantDao.getSitDownRestaurantById(sitDownRestaurant.getRestaurantId());
 	}
 
 	private TakeOutRestaurant takeOutRestaurantExerciser(Company company) {
@@ -323,5 +325,50 @@ public class WelcomeController {
 		reviewDao.getReviewById(review1.getReviewId());
         reviewDao.getReviewByRestaurantId(restaurant.getRestaurantId());
 		reviewDao.getReviewByUserName(user.getUserName());
+	}
+
+	private void recommendationExerciser(User user, Restaurant restaurant) {
+		Recommendation recommendationInit1 = new Recommendation(
+				0,
+				user.getUserName(),
+				restaurant.getRestaurantId()
+		);
+		Recommendation recommendationInit2 = new Recommendation(
+				0,
+				user.getUserName(),
+				restaurant.getRestaurantId()
+		);
+		recommendationDao.delete(recommendationInit1);
+		Recommendation recommendation = recommendationDao.create(recommendationInit1);
+		Recommendation recommendation2 = recommendationDao.create(recommendationInit2);
+		recommendationDao.getRecommendationById(recommendation.getRecommendationId());
+		recommendationDao.getRecommendationByRestaurantId(restaurant.getRestaurantId());
+		recommendationDao.getRecommendationByUserName(user.getUserName());
+	}
+
+	private void reservationExerciser(User user, SitDownRestaurant sitDownRestaurant){
+		Reservation reservationInit1 = new Reservation(
+				0,
+				new java.sql.Timestamp(1483344000000L),
+				new java.sql.Timestamp(1483344000001L),
+				5,
+				user.getUserName(),
+				sitDownRestaurant.getRestaurantId()
+		);
+		Reservation reservationInit2 = new Reservation(
+				0,
+				new java.sql.Timestamp(1483344000000L),
+				new java.sql.Timestamp(1483344000001L),
+				5,
+				user.getUserName(),
+				sitDownRestaurant.getRestaurantId()
+		);
+		reservationDao.delete(reservationInit1);
+		Reservation reservation1 = reservationDao.create(reservationInit1);
+		Reservation reservation2 = reservationDao.create(reservationInit2);
+
+        reservationDao.getReservationById(reservation1.getReservationId());
+		reservationDao.getReservationBySitDownRestaurantId(sitDownRestaurant.getRestaurantId());
+		reservationDao.getReservationByUserName(user.getUserName());
 	}
 }

@@ -39,6 +39,7 @@ public class JdbcFoodCartRestaurant extends JdbcRestaurantDao implements FoodCar
                 foodCartRestaurant.getCompanyName()
         );
         Restaurant restaurant = create(toMakeRestaurant);
+		foodCartRestaurant.setRestaurantId(restaurant.getRestaurantId());
         String sql = "INSERT INTO FoodCartRestaurant VALUES (?, ?)";
         Connection conn = null;
         try {

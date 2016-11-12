@@ -122,7 +122,7 @@ public class JdbcReviewDao extends MyJdbcDaoSupport implements ReviewDao {
 
     @Override
     public List<Review> getReviewByRestaurantId(int restaurantId) {
-		String sql = "SELECT * FROM Reviews WHERE RestaurandId = ?";
+		String sql = "SELECT * FROM Reviews WHERE RestaurantId = ?";
 
 		Connection conn = null;
 
